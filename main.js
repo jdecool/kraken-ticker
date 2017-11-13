@@ -4,6 +4,7 @@ const fetch = require('electron-fetch')
 let tray = null
 let timer = null;
 let currencySelected = "BCHEUR"
+let refreshRate = 5000
 
 app.on('ready', () => {
   app.dock.hide()
@@ -444,12 +445,51 @@ app.on('ready', () => {
       type: "separator",
     },
     {
+      label: "Refresh rate",
+      submenu: [
+        {
+          label: "5 seconds",
+          type: "radio",
+          checked: true,
+          click() { refreshRate = 5000 },
+        },
+        {
+          label: "15 seconds",
+          type: "radio",
+          click() { refreshRate = 15000 },
+        },
+        {
+          label: "30 seconds",
+          type: "radio",
+          click() { refreshRate = 30000 },
+        },
+        {
+          label: "1 minute",
+          type: "radio",
+          click() { refreshRate = 60000 },
+        },
+        {
+          label: "5 minutes",
+          type: "radio",
+          click() { refreshRate = 300000 },
+        },
+        {
+          label: "15 minutes",
+          type: "radio",
+          click() { refreshRate = 900000 },
+        },
+      ],
+    },
+    {
+      type: "separator",
+    },
+    {
       role: "quit",
     }
   ]))
 
   updateCurreny()
-  timer = setInterval(updateCurreny, 5000)
+  timer = setInterval(updateCurreny, refreshRate)
 })
 
 app.on('window-all-closed', () => {
