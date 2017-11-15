@@ -161,7 +161,7 @@ const REFRESH_RATES = [
   },
   {
     label: "15 seconds",
-    value: 5000,
+    value: 15000,
   },
   {
     label: "30 seconds",
@@ -169,15 +169,15 @@ const REFRESH_RATES = [
   },
   {
     label: "1 minute",
-    value: 5000,
+    value: 60000,
   },
   {
     label: "5 minutes",
-    value: 5000,
+    value: 300000,
   },
   {
     label: "15 minutes",
-    value: 5000,
+    value: 900000,
   },
 ]
 
