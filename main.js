@@ -1,4 +1,4 @@
-const {app, Menu, MenuItem, Tray} = require('electron')
+const {app, Menu, MenuItem, Tray, dialog} = require('electron')
 const fetch = require('electron-fetch')
 const Configuration = require('./configuration')
 
@@ -7,9 +7,14 @@ let timerId = null
 let configuration = new Configuration()
 
 app.on('ready', () => {
+  if ('darwin' != process.platform) {
+    dialog.showErrorBox('Kraken-Ticker', 'Kraken-Ticker only works on Mac OS.')
+    app.quit()
+  }
+
   app.dock.hide()
 
-  tray = new Tray('icon.png')
+  tray = new Tray(__dirname + '/icon.png')
   tray.setTitle('Kraken Ticker')
   tray.setContextMenu(Menu.buildFromTemplate([
     ...configuration.getCurrencyAvailable().map(function(currencyItem) {
