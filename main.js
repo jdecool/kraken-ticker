@@ -40,7 +40,7 @@ app.on('ready', () => {
           checked: configuration.getRefreshRate() == rateItem,
           click() {
             configuration.setRefreshRate(rateItem)
-            setCurrencyRateRefresh()
+            scheduleRateRefresh()
           }
         }
       })]
@@ -50,23 +50,22 @@ app.on('ready', () => {
   ]))
 
   updateCurrencyRate()
-  setCurrencyRateRefresh()
 })
 
 app.on('window-all-closed', () => {
   if (timerId) {
-    clearInterval(timerId)
+    clearTimeout(timerId)
   }
 
   app.quit()
 })
 
-function setCurrencyRateRefresh() {
+function scheduleRateRefresh() {
   if (timerId) {
-    clearInterval(timerId)
+    clearTimeout(timerId)
   }
 
-  timerId = setInterval(updateCurrencyRate, configuration.getRefreshRate().value)
+  timerId = setTimeout(updateCurrencyRate, configuration.getRefreshRate().value)
 }
 
 function updateCurrencyRate() {
@@ -81,6 +80,12 @@ function updateCurrencyRate() {
 
       tray.setTitle(formattedValue)
       console.log((new Date()).toTimeString() + ' | ' + currencyPair + ' | ' + formattedValue)
+
+      scheduleRateRefresh()
     })
-    .catch((error) => { console.error(error); });
+    .catch((error) => {
+      console.error(error)
+
+      scheduleRateRefresh()
+    });
 }
