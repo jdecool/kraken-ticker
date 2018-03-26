@@ -7,11 +7,17 @@
     "start": "electron .",
     "dist": "ectron-builder"
   },
-  "keywords": ["cryptocurrency", "bitcoin", "kraken", "rates", "market"],
+  "keywords": [
+    "cryptocurrency",
+    "bitcoin",
+    "kraken",
+    "rates",
+    "market"
+  ],
   "author": "Jérémy DECOOL <contact@jdecool.fr>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "~1.7.8",
+    "electron": "^1.7.13",
     "electron-builder": "^19.45.4"
   },
   "dependencies": {
