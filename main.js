@@ -1,5 +1,5 @@
 const {app, Menu, MenuItem, Tray, dialog} = require('electron')
-const fetch = require('electron-fetch')
+const axios = require('axios')
 const Configuration = require('./configuration')
 
 let tray = null
@@ -71,10 +71,10 @@ function scheduleRateRefresh() {
 function updateCurrencyRate() {
   let currencyPair = configuration.getCurrency().pair
 
-  fetch('https://api.kraken.com/0/public/Ticker?pair=' + currencyPair)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      let result = responseJson['result'][Object.keys(responseJson['result'])[0]]
+  axios.get('https://api.kraken.com/0/public/Ticker?pair=' + currencyPair)
+    .then(response => {
+      let data = response.data;
+      let result = data['result'][Object.keys(data['result'])[0]]
       let value = parseFloat(result['a'][0])
       let formattedValue = value.toLocaleString('fr-FR', {style: "currency", currency: "EUR"})
 
@@ -87,5 +87,5 @@ function updateCurrencyRate() {
       console.error(error)
 
       scheduleRateRefresh()
-    });
+    })
 }
