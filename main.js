@@ -1,4 +1,4 @@
-const {app, Menu, MenuItem, Tray, dialog} = require('electron')
+const {app, Menu, Tray, dialog} = require('electron')
 const axios = require('axios')
 const Configuration = require('./configuration')
 
