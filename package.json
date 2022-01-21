@@ -17,14 +17,14 @@
   "author": "Jérémy DECOOL <contact@jdecool.fr>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^11.5.0",
-    "electron-builder": "^22.4.1"
+    "electron": "^16.0.7",
+    "electron-builder": "^22.14.5"
   },
   "build": {
     "appId": "kraken-ticker"
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.25.0",
     "lodash": "^4.17.21"
   }
 }
